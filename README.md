@@ -2,4 +2,4 @@
 
 A collection of tools and scripts related to oAuth.
 
-oauth_test_client: allows you to test your oauth server with a simple oauth client
+`ruby oauth_test_client` - allows you to generate an oauth access token, which you can later append to calls to Wecounsel API
