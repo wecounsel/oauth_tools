@@ -1,9 +1,9 @@
 require 'oauth2'
 require 'pry'
 
-callback_url = 'http://localhost:3001/auth/wecounsel/callback'
-client_id = '24f58e3b8a0bca3c8f650572bfb0726b6f09c819cc73c1533c935c6b2e213529'
-client_secret = '8c4c50624297675cac4fdd10b0fa4b277c6ae8e30d675853eab06c1a9cc12775'
+callback_url = ENV['OAUTH_CALLBACK_URL'] || 'http://localhost:3001/auth/wecounsel/callback'
+client_id =  ENV['OAUTH_CLIENT_ID'] || '48375dcb5784d19b19623cbe70af64ef11b63227f6fae90cb9db44e5ae59a1a1'
+client_secret = ENV['OAUTH_CLIENT_SECRET'] || '8b6fbde3b246d9da40bdc408466c406ce16501e891b87f40a2770e05fed7888a'
 
 client = OAuth2::Client.new(client_id, client_secret, :site => 'http://localhost:3000')
 auth_url = client.auth_code.authorize_url(:redirect_uri => callback_url)
