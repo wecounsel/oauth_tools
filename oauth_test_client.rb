@@ -1,13 +1,15 @@
 require 'oauth2'
 require 'pry'
+require './helpers'
 
-callback_url = ENV['OAUTH_CALLBACK_URL'] || 'http://localhost:3001/auth/wecounsel/callback'
-client_id =  ENV['OAUTH_CLIENT_ID'] || '48375dcb5784d19b19623cbe70af64ef11b63227f6fae90cb9db44e5ae59a1a1'
-client_secret = ENV['OAUTH_CLIENT_SECRET'] || '8b6fbde3b246d9da40bdc408466c406ce16501e891b87f40a2770e05fed7888a'
+callback_url = ENV['OAUTH_CALLBACK_URL'] || get_callback_url
+client_id =  ENV['OAUTH_CLIENT_ID'] || get_client_id
+client_secret = ENV['OAUTH_CLIENT_SECRET'] || get_client_secret
+site = ENV['OAUTH_PROVIDER_URL']
 
-client = OAuth2::Client.new(client_id, client_secret, :site => 'http://localhost:3000')
+client = OAuth2::Client.new(client_id, client_secret, :site => get_provider_url)
 auth_url = client.auth_code.authorize_url(:redirect_uri => callback_url)
-puts "Make sure WeCounsel server is running at http://localhost:3000, visit the following URL and copy the 'code' query param in the redirected address line (ignore the load error):"
+puts "Make sure WeCounsel server is running at #{get_provider_url}, visit the following URL and copy the 'code' query param in the redirected address line (ignore the page error):"
 puts "#{auth_url}"
 puts "Enter the code param here: "
 code = gets.chomp
@@ -16,4 +18,4 @@ token = access.token
 puts
 puts "Hooray! Here's your oAuth token: #{token}"
 puts "Now you can for example open this link: "
-puts "http://api.lvh.me:3000/v1/users/225?access_token=#{token} (substitute 225 for existing user_id)"
+puts "#{get_example_api_url(token)} (substitute 225 for existing Wecounsel user_id)"
