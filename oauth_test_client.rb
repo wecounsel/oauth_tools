@@ -9,7 +9,14 @@ site = ENV['OAUTH_PROVIDER_URL']
 
 client = OAuth2::Client.new(client_id, client_secret, :site => get_provider_url)
 auth_url = client.auth_code.authorize_url(:redirect_uri => callback_url)
-puts "Make sure WeCounsel server is running at #{get_provider_url}, visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
+
+if ENV['ENV'] == 'staging'
+  puts "Visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
+else
+  puts "1) Visit #{get_provider_url}/oauth/applications , add a new application, and copy the the values of Application ID, Secret and Callback URL to helpers.rb "
+  puts "2) Make sure WeCounsel server is running at #{get_provider_url}, visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
+end
+
 puts "#{auth_url}"
 puts "Enter the code param here: "
 code = gets.chomp
