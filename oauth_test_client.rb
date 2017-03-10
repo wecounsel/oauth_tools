@@ -9,7 +9,7 @@ site = ENV['OAUTH_PROVIDER_URL']
 
 client = OAuth2::Client.new(client_id, client_secret, :site => get_provider_url)
 auth_url = client.auth_code.authorize_url(:redirect_uri => callback_url)
-puts "Make sure WeCounsel server is running at #{get_provider_url}, visit the following URL and copy the 'code' query param in the redirected address line (ignore the page error):"
+puts "Make sure WeCounsel server is running at #{get_provider_url}, visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
 puts "#{auth_url}"
 puts "Enter the code param here: "
 code = gets.chomp
