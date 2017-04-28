@@ -7,6 +7,9 @@
 #  Ignore .pryrc
 .pryrc
 
+# ignore secrets.yml
+secrets.yml
+
 # Ignore PIDs
 *.pid
 
