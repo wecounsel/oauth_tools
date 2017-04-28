@@ -20,7 +20,6 @@ puts "#{auth_url}"
 puts "Enter the code param here: "
 code = gets.chomp
 access = client.auth_code.get_token(code, :redirect_uri => Settings.callback_url)
-binding.pry
 token = access.token
 puts
 puts "Hooray! Here's your oAuth token: #{token}"
