@@ -20,8 +20,7 @@ puts "#{auth_url}"
 puts "Enter the code param here: "
 code = gets.chomp
 access = client.auth_code.get_token(code, :redirect_uri => Settings.callback_url)
-token = access.token
 puts
-puts "Hooray! Here's your oAuth token: #{token}"
-puts "Now you can for example open this link: "
-puts "#{get_example_api_url(token)} (substitute 225 for existing Wecounsel user_id)"
+puts "Hooray! Here's your oAuth access token: #{access.token}"
+puts "Now you can for example open this link: #{get_example_api_url(access.token)} (substitute 225 for existing Wecounsel user_id)"
+puts "And here's your refresh token: #{access.refresh_token} . You can use it to get a new access token, when the existing one expires. "
