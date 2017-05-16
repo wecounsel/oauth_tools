@@ -17,10 +17,17 @@ else
 end
 
 puts "#{auth_url}"
+puts
 puts "Enter the code param here: "
 code = gets.chomp
-access = client.auth_code.get_token(code, :redirect_uri => Settings.callback_url)
+token = client.auth_code.get_token(code, :redirect_uri => Settings.callback_url)
 puts
-puts "Hooray! Here's your oAuth access token: #{access.token}"
-puts "Now you can for example access this link: #{get_example_api_url(access.token)} (substitute 225 for existing Wecounsel user_id)"
-puts "And here's your refresh token: #{access.refresh_token} . You can use it to get a new access token, when the existing one expires. "
+puts "Hooray! Here's your oAuth access token: #{token.token}"
+if token.refresh_token
+  puts "And here's your refresh token: #{token.refresh_token} . You can use it to get a new access token, when the existing one expires. "
+end
+puts
+puts "Now getting your user info..."
+user_response = token.get('/oauth/me')
+puts "Your user info: #{user_response.parsed}"
+puts "Now you can for example access this link: #{get_example_api_url(token.token, user_response.parsed["id"])}"
