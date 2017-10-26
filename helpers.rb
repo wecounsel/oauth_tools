@@ -6,7 +6,7 @@ def get_example_api_url(token, id)
     when 'edge'
       "https://test-pp.wecounsel.com"
     when 'production'
-     "https://portal.wecounsel.com"
+     "https://api.wecounsel.com"
     else
       "http://localhost:3000"
   end
