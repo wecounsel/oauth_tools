@@ -28,7 +28,8 @@ if token.refresh_token
 end
 puts
 puts "Now getting your user info..."
-user_response = token.get('/v1/users/me')
+# Every API request must have the correct Content-Type header
+user_response = token.get('/v1/users/me', {headers: {'CONTENT-TYPE' => 'application/vnd.api+json'}})
 user_info = JSON.parse(user_response.body)
 puts "Your user info: #{user_info}"
 puts "Now you can for example access this link: #{get_example_api_url(token.token, user_info["data"]["id"].to_i)}"
