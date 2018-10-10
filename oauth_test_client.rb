@@ -1,5 +1,6 @@
 require 'oauth2'
 require 'pry'
+require 'active_support/all'
 require './hash'
 require './helpers'
 require './settings'
@@ -9,7 +10,7 @@ Settings.load!("secrets.yml", :env => ENV['ENV'] || 'development')
 client = OAuth2::Client.new(Settings.client_id, Settings.client_secret, :site => Settings.provider_url)
 auth_url = client.auth_code.authorize_url(:redirect_uri => Settings.callback_url)
 
-if ['staging', 'edge', 'production'].include?(ENV['ENV'])
+if auth_url.present?
   puts "Visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
 else
   puts "1) Visit #{Settings.provider_url}/oauth/applications , add a new application, and copy the the values of Application ID, Secret and Callback URL to secrets.yml"
