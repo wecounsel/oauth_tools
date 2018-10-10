@@ -8,7 +8,7 @@ A client test script that requests and receives an oauth access token from the W
 For a quick start, do the following:
 - Clone the project
 - Make sure that the server you are testing has an oauth app defined or create a new one. For Wecounsel, that would be at `<wecounsel>/oauth/applications`. Write down the values for `client_id`, `client_secret` and `callback_url`
-- Add `secrets.yml` file with appropriate section for each environment you want to test. Change the values according to previous paragraph:
+- Add `secrets.yml` file with the following section for each environment you want to test, changing the values according to previous paragraph:
 
         edge:
           provider_url: https://test-pp.wecounsel.com
