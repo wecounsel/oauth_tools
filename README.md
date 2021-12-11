@@ -15,5 +15,6 @@ For a quick start, do the following:
           client_id: d2c4c07bf5f38e74e6cdc28f8dd5de2ede8c1a38351ebfe1f27bc59ae15be805
           client_secret: af6c7880563f473135acc2d50fde98da4909f0b13150a8b12fc4034b09ff5b34
           callback_url: https://example.com/oauth/wecounsel/callback
+          scope: public
  
- - Run the script and follow instructions: `ENV=edge ruby oauth_test_client.rb`
+- Run the script and follow instructions: `ENV=edge ruby oauth_test_client.rb`

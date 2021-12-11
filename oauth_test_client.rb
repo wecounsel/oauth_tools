@@ -8,7 +8,7 @@ require './settings'
 Settings.load!("secrets.yml", :env => ENV['ENV'] || 'development')
 
 client = OAuth2::Client.new(Settings.client_id, Settings.client_secret, :site => Settings.provider_url)
-auth_url = client.auth_code.authorize_url(:redirect_uri => Settings.callback_url)
+auth_url = client.auth_code.authorize_url(redirect_uri: Settings.callback_url, scope: Settings.scope)
 
 if auth_url.present?
   puts "Visit the following URL, sign-in with your Wecounsel account, and copy the 'code' query param in the redirected address line (ignore the page error):"
